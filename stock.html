@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style >
+
+    html {
+        overflow-x: hidden;
+        background-color: #142033;
+        
+        }
+
+*{  padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'roboot', sans-serif;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+ nav1{
+  
+  width:100%;
+  height: 40px;
+  background-color: #101c30;
+  border:0.2px #2a3f70 solid;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  
+
+  
+ }
+nav1 ul {
+  list-style: none;
+  display: flex;
+}
+nav1 ul li {
+  margin: 0 35px;
+}
+nav1 ul li a {
+  font-weight: 300;
+  color: #adadad;
+  transition: 600ms;
+}
+nav1 ul li a:hover {
+  color: #f5f5f7;
+  font-size: 20px
+}
+
+
+
+
+ .collapsible {
+  background-color:#1c2538;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color:#0E1117;
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: #1c2538;
+}
+
+.content {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  
+}
+
+.ima{
+    width: 100px;
+    height: 100px;
+    float: left;
+    padding: 10px;
+    margin: 20px;
+  }
+  footer{
+   
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #111;
+    height: auto;
+    width: 100vw;
+    font-family:"Open Sans";
+    color: #ffffff83;
+  }
+  .content{
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .content h3{
+    font-size: 1.8rem;
+    font-weight: 400;
+    text-transform: capitalize;
+    line-height: 3rem;
+  
+  }
+  .content p{
+    
+    max-width: 500px;
+    margin: 10px auto;
+    line-height: 28px;
+    font-size: 15px;
+  }
+  .links{
+    
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0 1rem 0;
+  }
+  .links li{
+    margin: 0 10px;
+  }
+  .links p{
+    text-decoration: none;
+    color: #ffffff83;
+    font-size: 1.1rem;
+    transition: color .4s ease;
+  
+  }
+  .footer-bottom{
+    background: #0000;
+    width: 100vw;
+    padding: 20px 0;
+    text-align: center;
+  }
+  .footer-bottom p{
+    font-size: 14px;
+    word-spacing: 2px;
+    text-transform: capitalize;
+  }
+  .footer-bottom span{
+    text-transform: uppercase;
+   
+    font-weight: 200;
+  }
+  .add-link::after {
+    content: " (" attr(href) ")";
+    color:red;
+    background-color: transparent;
+    text-decoration: underlined;
+}
+
+
+
+
+</style>
+ 
+ 
+
+
+
+
+</head>
+<body>
+
+
+    <nav1 style="padding: 40px;width: 100%;">
+        <img src="{{url_for('static', filename='stock.png')}}"style="width:90px;height:75px;margin-right:20px;margin-top:5px"/>
+        <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="#price">Price Summary</a></li>  
+        <li><a href="#funda">Fundamentals</a></li>  
+        <li><a href="#finan">Financials</a></li>  
+        <li><a href="#fs">Financial Staments</a></li>  
+        <li><a href="#pred">Prediction</a></li>  
+       
+        </ul> 
+        <nav2 style="width: 100%;display: flex;justify-content: end;">
+        <form action="/search" method="POST" >
+            <label form="searh"> </label>
+            <input style="border: none; height:45px ; width: 300px; border-radius: 30px;font-size: 16px;padding: 12px 20px 12px 12px; margin-right: 25px;" 
+            id="s1" name="stock" type="search" placeholder="Search Stock" >
+        </form>
+
+        <a href="/profile"><img src="{{url_for('static', filename='user.png')}}"style="width: 50px;height: 50px;margin-right:5px;"/></a>
+        </nav2>
+    </nav1>
+
+
+    <div  class = "div1" style= "margin-top: 25px;margin-left: 10px;">
+        <table  >
+            <tr>
+              <td style="font-size:35px;margin-top: auto;color: rgb(255, 255, 255);" ><b>{{stock_name}}</b></td>
+              <td style="font-size:25px;margin-top: auto;color: rgb(255, 255, 255, 0.753);">({{ticker}})
+                <tr>
+                    <td  colspan ="4" style="padding-left:5px;font-size:small;margin-top:auto;color: rgba(255, 255, 255, 0.753);">NSE - NSE Real Time Price.Currency in INR   <b>{{Date}}</b></td> 
+                </tr>
+                    </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+            <td style="padding-left: 10px;font-size:30px;margin-top: auto;color: rgb(255, 255, 255);" ><b>{{price}}</b></td>
+            {% if change < "0" %}
+            <td style="font-size:large;margin-top: auto;margin-left:5px;color:#FF0000;"><b>({{change}})</b></td>
+            {% else %}
+            <td style="font-size:large;margin-top: auto;margin-left:5px;color:#00FF00;"><b>({{change}})</b></td>
+            {% endif %}
+            
+            </tr>
+        </table>
+    </div>
+    <nav2 style="width: 100%;height: 1px;display: flex; box-sizing: border-box;background-color:#2a3f70; padding-top: 2px;margin-top: 5px;">
+
+    </nav2>
+    
+
+
+
+
+    <table cellspacing="10px" style="width: 100%; margin-top:20px ;height:500px;margin-bottom: 100px;padding-right: 5px;">
+        <tr>
+            
+            <td >{{ graph | safe }}</td>
+            <td  valign ="top"style =" margin-top:5px;
+            height: 200px;
+            width:50%;
+            backdrop-filter: blur(8px); 
+            box-shadow: inset 0 0 0 250px  rgba(255,255,255,0.08);
+            border: 0.5px solid #5d5f63;
+            border-radius: 10px;">
+            <table style="width: 100%;">
+                <tr style="background-color: aqua;width: 100%;height: 70px;">
+                    <td  style="border-top-left-radius: 10px; border-top-right-radius: 10px; font-size:x-large;padding-left: 10px;"  >
+                        <b>{{name}}</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="font-family: Arial, Helvetica, sans-serif;color: white ;padding-left: 10px;padding-top: 10px;text-overflow: ellipsis; width: 50ch;">{{company}}</td>
+                </tr>
+            </table>
+            </td>
+        </tr>
+    </table>
+
+
+
+
+
+    <div  style="margin-bottom:80px;width:100%;padding-left:25px;padding-right:25px">
+    <table cellspacing = "35px" id = "price" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 2); height: 150px;font-family: Arial, Helvetica, sans-serif; ;width: 100%;  backdrop-filter: blur(8px); 
+    box-shadow: inset 0 0 0 200px rgba(255,255,255,0.08);border: 0.5px solid #5d5f63; border-radius: 10px;color: white; padding: 20px; margin-top: 5px;">
+        <tr>
+            <td  style="padding-bottom: 5px;font-size: larger" >
+                <b>Price Summary</b>
+            </td>
+        </tr>
+        <tr >
+            <td style="padding-left: 50px;">
+                OPEN PRICE : {{Open}}
+            </td>
+            <td>
+                PREV. CLOSE : {{Close}}
+            </td>
+            <td>
+                TODAY'S HIGH : {{thigh}}
+            </td>
+            <td>
+                TODAY'S LOW : {{tlow}}
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-left: 50px;">
+                52 WEEK HIGH : {{fthigh}}
+            </td>
+            <td>
+                52 WEEK LOW : {{ftlow}}
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+     <table cellspacing = "50px"id="funda" style=" width:100%;height:100%;margin-bottom: 40px;">
+        
+        <tr>
+            <td style="width: 50%;padding-right: 20px;">
+                <table cellspacing ="50px" style=" backdrop-filter: blur(8px); 
+                box-shadow: inset 0 0 0 200px rgba(255,255,255,0.08);
+    
+                border: 0.5px solid #5d5f63; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 2);width:100%;height: 100%;font-family: Arial, Helvetica, sans-serif;background-color: #1c2538; border-radius: 10px;color: white; padding: 20px; margin-top: 5px;">
+                    <tr>
+                        <td style="padding-bottom: 5px;font-size: larger" >
+                            <strong>Fundamentals</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 50px;">Market Cap : {{mkc}}</td><td>ROE : {{roe}}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 50px;">P/E Ratio(TTM) : {{PE}}</td><td>EPS(TTM) : {{EP}}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 50px;">P/B Ratio : {{PB}}</td><td>Div Yield : {{div}}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 50px;">Debt to Equity : {{DE}}</td><td>Book Value : {{Bv}}</td>
+                    </tr>
+                </table>
+            </td>
+            <td style="width: 50%;">
+                <table cellspacing="50px" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 2);backdrop-filter: blur(8px); 
+                
+    
+                border: 0.5px solid #5d5f63;width:100%;height:100%;font-family: Arial, Helvetica, sans-serif;background-color: #1c2538; border-radius: 10px;color: white; padding: 20px; margin-top: 5px;">
+                    <tr>
+                        <td style="padding-bottom: 5px;font-size: larger" >
+                            <strong>About Company</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 50px;">Sector : {{sector}}</td><td>Industry : {{industry}}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 50px;">Employees : {{employ}}</td><td> City : {{city}}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 50px;">Country : {{country}}</td><td>Phone : {{phone}}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left: 50px;">Website:<a class="add-link" href={{web}}></a></td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+    </table>
+    <table cellspacing = "10px"id="funda" style=" width:100%;height:100%;margin-bottom: 40px;">
+        
+        <tr>
+            <td style="width: 50%;padding-right: 20px;">
+                <table cellspacing ="15px" style=" backdrop-filter: blur(8px); 
+                box-shadow: inset 0 0 0 200px rgba(255,255,255,0.08);
+    
+                border: 0.5px solid #5d5f63; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 2);width:100%;height: 100%;font-family: Arial, Helvetica, sans-serif;background-color: #1c2538; border-radius: 10px;color: white; padding: 20px; margin-top: 5px;">
+                    <tr>
+                        <td style="padding-bottom: 5px;font-size: larger" >
+                            <strong>NEWS</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >Title : {{title0}}</td>
+                    </tr>
+                    <tr>
+                        <td>Link:<a class="add-link" href={{link0}}></a></td><td>Publisher : {{pub0}}</td>
+                    </tr>
+                    <tr>
+                        <td >Title: {{title1}}</td>
+                    </tr>
+                    <tr>
+                        <td>Link:<a class="add-link" href={{link1}}></a></td><td>Publisher : {{pub1}}</td>
+                    </tr>
+                </table>
+            </td>
+            <td style="width: 50%;">
+                <table cellspacing="10px" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 2);backdrop-filter: blur(8px); 
+                
+    
+                border: 0.5px solid #5d5f63;width:100%;height:100%;font-family: Arial, Helvetica, sans-serif;background-color: #1c2538; border-radius: 10px;color: white; padding: 20px; margin-top: 5px;">
+                    <tr>
+                        <td style="padding-bottom: 5px;font-size: larger" >
+                            <strong>Share Holdings</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                       <td>
+                        {{pie | safe}}
+                       </td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+    </table>
+
+     <table id= "finan" style="font-family: Arial, Helvetica, sans-serif; ;width: 100%; border-radius: 10px;color: white; padding: 10px; margin-top: 5px;margin-bottom: 80px;">
+        <tr>
+            <td style="padding-bottom: 5px;font-size:30px;color:white" >
+                <strong>Financials</strong>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table cellspacing="8px" style="width: 100%;height:200px">
+                    <tr >
+                        <td  style="backdrop-filter: blur(8px); 
+                        box-shadow: inset 0 0 0 200px rgba(255,255,255,0.08);
+            
+                        border: 0.5px solid #5d5f63;width:33%;border: 1px solid; border-color:#1c2538 ; border-radius: 10px;" >
+                            {{graph1 | safe}}
+                        </td>
+                        <td style="backdrop-filter: blur(8px); 
+                        box-shadow: inset 0 0 0 200px rgba(255,255,255,0.08);
+            
+                        border: 0.5px solid #5d5f63;width:33%;border: 1px solid;border-color: #1c2538; border-radius: 10px;">
+                            {{graph2 | safe}}
+                        </td>
+                        <td style="backdrop-filter: blur(8px); 
+                        box-shadow: inset 0 0 0 200px rgba(255,255,255,0.08);
+            
+                        border: 0.5px solid #5d5f63;width: 33%;border: 1px solid;border-color: #1c2538; border-radius: 10px; padding: 8px;">
+                            {{graph3 | safe}} 
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+     </table >
+     <button id ="fs"class="collapsible" style="margin-bottom: 15px;"><b>Financial Staments v </b></button>
+     <div  class="content">
+     <table style="font-family: Arial, Helvetica, sans-serif; ;width: 100%; border-radius: 10px;color: white; padding: 10px; margin-top: 5px;">
+        <tr>
+            <td>
+                <table cellspacing="20px" style="height:200px; margin-bottom:40px">
+                    <th>Income Statement</th>
+                    <tr >
+                        <td  style="border: 1px solid; border-color:#ffffff ; border-radius: 10px; padding: 10px;" >
+                            {{table | safe}}
+                        </td>
+                    </tr>
+                    <th>Balance Statement</th>
+                    <tr>    
+                        <td style="border: 1px solid;border-color: #ffffff; border-radius: 10px;padding: 10px;">
+                            {{table2 | safe}}
+                        </td>
+                    </tr>
+                    <th>Cashflow Statement</th>
+                    <tr>    
+                        <td style="border: 1px solid;border-color: #ffffff; border-radius: 10px;padding: 10px;">
+                            {{table3 | safe}}
+                        </td>
+                    </tr>
+                
+                </table>
+            </td>
+        </tr>
+
+     </table>
+    </div>
+
+
+    <p id ="pred"><b style="font-size:25px;color:white;margin-left: 5px;margin-top: 15px;">Prediction Chart</b></p>
+    
+    {% if display == False %}
+    <div style="width:100%;height:100px;padding:200px;
+    background-color: #ffffff;
+    border: 1px solid black;
+    opacity: 0.5;">
+    <p align="center" id ="pred"><b style="font-size:25px;color:black;margin-left: 5px;margin-top: 15px;">Create Account to View Prediction</b></p>
+    </div> 
+    {% else %}
+    <table  style="width: 100%;margin-top: 10px;">
+        <tr>
+            
+            <td align="center" style="  border-radius: 10px;padding: 10px;backdrop-filter: blur(8px); 
+            box-shadow: inset 0 0 0 1000px rgba(255, 255, 255, 0.507);
+
+            border: 0.5px solid #5d5f63;">
+                {{pred | safe}}
+            </td>
+        </tr>
+    </table>
+    {% endif %}
+
+    
+    <footer style = "margin-top:100px;background: #2a3f70; padding:20px">
+        <div class="content">
+        <img class="ima" style="width: 150px;height: 120px;" src="{{url_for('static', filename='stock.png')}}">
+      
+        <h3 style="margin-right: 150px;">Stock-Ticker</h3>
+        <p>
+        The best stock screening, equity research and company analysis tool built
+        by a passionate team of investors at Stock_Ticker®. Intelligent Stock picking
+        Starts here.
+  
+        </p>
+      
+        <p>Final Year Cs Project</p>
+      
+        <ul class="links">
+        <li>
+          <p>ALIM JAHAGIRDAR: S20-701</p>
+        </li>
+        <li>
+          <p>ALIM JAHAGIRDAR: S20-701</p>
+        </li>
+        <li>
+          <p>ALIM JAHAGIRDAR: S20-701</p>
+        </li>
+        </ul>
+        <ul class="links">
+        <li>
+          <p>ALIM JAHAGIRDAR: S20-701</p>
+        </li>
+        <li>
+          <p>ALIM JAHAGIRDAR: S20-701</p>
+        </li>
+        <li>
+          <p>ALIM JAHAGIRDAR: S20-701</p>
+        </li>
+      </ul>
+    
+    </div>
+    <div class="footer-bottom">
+      <p>copyright &copy;2023 designed by <span>Stock-Ticker</span> </p>
+    </div>
+    </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+     
+    
+  
+
+
+
+
+
+
+
+     <script>
+        var coll = document.getElementsByClassName("collapsible");
+        var i;
+        
+        for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight){
+              content.style.maxHeight = null;
+            } else {
+              content.style.maxHeight = content.scrollHeight + "px";
+            } 
+          });
+        }
+        </script>    
+</body>
+</html>
