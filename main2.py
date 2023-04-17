@@ -17,7 +17,7 @@ main2 = Flask(__name__)
 
 
 
-path = "C:/Users/alimj/AppData/Local/Programs/Python/Python311/stocks.csv"
+path = "stocks.csv"
 df = pd.read_csv(path)
 
 firebaseConfig = {
