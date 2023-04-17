@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Homepage</title>
+    <style>
+
+html {
+  overflow-x: hidden;
+  background: -webkit-linear-gradient(25deg, #0f0bff, #0799fb, #332969, #8338EC, #3A86FF);
+}
+      
+*{
+  padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'roboot', sans-serif;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+nav {
+  width: 100%;
+  height: 46px;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  
+}
+nav ul li {
+  margin: 0 50px;
+}
+a .button {
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  text-align: center;
+  font-size: 28px;
+  width: 140px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+a .button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+
+
+
+
+a .button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+
+a .button:hover span {
+  padding-right: 25px;
+}
+
+a .button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+
+
+.ima{
+  width: 100px;
+  height: 100px;
+  float: left;
+  padding: 10px;
+  margin: 20px;
+}
+footer{
+ 
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #111;
+  height: auto;
+  width: 100vw;
+  font-family:"Open Sans";
+  color: #ffffff83;
+}
+.content{
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.content h3{
+  font-size: 1.8rem;
+  font-weight: 400;
+  text-transform: capitalize;
+  line-height: 3rem;
+
+}
+.content p{
+  
+  max-width: 500px;
+  margin: 10px auto;
+  line-height: 28px;
+  font-size: 15px;
+}
+.links{
+  
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0 1rem 0;
+}
+.links li{
+  margin: 0 10px;
+}
+.links p{
+  text-decoration: none;
+  color: #ffffff83;
+  font-size: 1.1rem;
+  transition: color .4s ease;
+
+}
+.footer-bottom{
+  background: #0000;
+  width: 100vw;
+  padding: 20px 0;
+  text-align: center;
+}
+.footer-bottom p{
+  font-size: 14px;
+  word-spacing: 2px;
+  text-transform: capitalize;
+}
+.footer-bottom span{
+  text-transform: uppercase;
+ 
+  font-weight: 200;
+}
+
+        </style>
+    </head>
+<body>
+    <nav style="background-color:#1c2538; font-size: small;padding: 25px;">
+        <ul>
+          <li>
+            <table cellspacing="5px" >
+                <tr>
+                  <td style=" background-color:black;color: #ffffff;font-family: Arial, Helvetica, sans-serif;font-size:17px;padding-right:10px;padding-left:10px"><b>SENSEX </b></td>
+                  <td><b style="color:#ffffff;font-family: Arial, Helvetica, sans-serif;font-size: medium;"> {{sensex}}</b></td>
+                </tr>
+                <tr>
+                  {% if sengroww < "0" %}
+                  <td align="right" colspan= 2><b style="color:#FF0000;font-family: Arial, Helvetica, sans-serif;font-size: medium;">{{sengroww}}</b></td>
+                  {% else %}
+                  <td align="right" colspan= 2><b style="color:#00FF00;font-family: Arial, Helvetica, sans-serif;font-size: medium;">{{sengroww}}</b></td>
+                  {% endif %}
+                </tr>
+              </table>
+        
+          </li>  
+          
+          <li>
+            <table cellspacing="5px">
+                <tr>
+                  <td style="color: #ffffff;font-family: Arial, Helvetica, sans-serif;font-size:17px;padding-right:10px;padding-left:10px;background-color:black"><b>NIFTY50</b></td>
+                  <td><b style="color:#ffffff;font-family: Arial, Helvetica, sans-serif;font-size: medium;">{{NIFTY50}}</b></td>
+                </tr>
+                <tr>
+                  {% if nifgroww < "0" %}
+                  <td align="right" colspan= 2><b style="color:#FF0000;font-family: Arial, Helvetica, sans-serif;font-size: medium;">{{nifgroww}}</b></td>
+                  {% else %}
+                  <td align="right" colspan= 2><b style="color:#00FF00;font-family: Arial, Helvetica, sans-serif;font-size: medium;">{{nifgroww}}</b></td>
+                  {% endif %}
+
+                </tr>
+              </table>
+        
+          </li> 
+
+          <li>
+            <table cellspacing="5px">
+                <tr>
+                  <td style="color: #ffffff;font-family: Arial, Helvetica, sans-serif;font-size:17px ;padding-right:10px;padding-left:10px;background-color:black"><b >NIFTY100</b></td>
+                  <td><b style="color:#ffffff;font-family: Arial, Helvetica, sans-serif;font-size: medium;">{{NIFTY100}}</b></td>
+                </tr>
+                <tr>
+                  {% if nifgrow100 < "0" %}
+                  <td align="right" colspan= 2><b style="color:#FF0000;font-family: Arial, Helvetica, sans-serif;font-size: medium;">{{nifgrow100}}</b></td>
+                  {% else %}
+                  <td align="right" colspan= 2><b style="color:#00FF00;font-family: Arial, Helvetica, sans-serif;font-size: medium;">{{nifgrow100}}</b></td>
+                  {% endif %}
+                </tr>
+              </table>
+
+
+
+          </li>  
+          <li>
+            <table cellspacing="5px">
+                <tr>
+                  <td style="color: #ffffff;font-family: Arial, Helvetica, sans-serif;font-size:17px;white-space: nowrap ;padding-right:10px;padding-left:10px;background-color:black"><b>NIFTY BANK</b></td>
+                  <td><b style="color:#ffffff;font-family: Arial, Helvetica, sans-serif;font-size: medium;">{{NIFTYBANK}}</b></td>
+                </tr>
+                <tr>
+                  {% if NIFTYBANKGROWW < "0" %}
+                  <td align="right" colspan= 2><b style="color:#FF0000;font-family: Arial, Helvetica, sans-serif;font-size: medium;">{{NIFTYBANKGROWW}}</b></td>
+                  {% else %}
+                  <td align="right" colspan= 2><b style="color:#00FF00;font-family: Arial, Helvetica, sans-serif;font-size: medium;">{{NIFTYBANKGROWW}}</b></td>
+                  {% endif %}
+                </tr>
+              </table>
+          </li> 
+        </ul>
+          
+    </nav>
+
+
+
+
+<table >
+  <tr>
+    <td>
+      <img src="{{url_for('static', filename='stock.png')}}" width="150" height="120" style="margin-right: 1150px; margin-top: 10px;margin-left: 5px;"/>
+    </td>
+      <td>
+          <a href="/login"> <button class = "button" style="border: none;font-size: large;color: #ffffff ;margin-right: 5px;background-color: #1c2538;border-radius:10px;padding:15px;font-family:Arial, Helvetica, sans-serif;"><span>Account</span></button></a>
+      </td>
+    </tr>
+</table>
+
+
+
+
+
+<h1 align = "center" style="color: #fff;font-family:  Arial, Helvetica, sans-serif;margin-top: 100px;margin-bottom: 5px;">Find Your Ticker At Stock-Ticker </h1>
+
+<form action="/search" method="POST" align="center" >
+    <label form="searh"> </label>
+    <input style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 2);border: none; height: 60px ; width: 700px; border-radius: 30px;font-size: 16px;padding: 12px 20px 12px 40px;" 
+    id="s1" name="stock" type="search" placeholder="Search Stock" oninput="this.value = this.value.toUpperCase()" autocomplete="chrome-off" >
+    
+    
+</form>
+
+<img src="{{url_for('static', filename='tech2edit.png')}}"style="width:100%;height=70px;z-index: -1;"/>
+
+<div>
+  <h2 align = "center" style="color: #fff;font-family:  Arial, Helvetica, sans-serif;margin-top: 100px;margin-bottom: 5px;">Here's how Stock-Ticker will help You </h2>
+  <img src="{{url_for('static', filename='ana.png')}}" width="200" height="200" style="margin-right: 1150px; margin-top: 10px;margin-left: 50px;"/>
+  <p style = "font-size: 25px;color: #fff;margin-left:50px;margin-top:15px">Stock analysis</p>
+  <p style="font-size:30px;color: #fff;margin-left:50px;margin-top:15px">Get Every information you need. Right Away!</p>
+  <pre style="margin-left:50px;margin-top:15px;color:#fff;font-size:20px">
+  Analyzing stocks is a serious affair and with Ticker you get one-stop destination for cutting-
+  edge stock research. Our stock analysis platform provides a sophisticated yet simple interface
+  that you would be impressed with while carrying out your stock analysis
+      
+      • Comprehensive Data and Research
+      
+      • Flexible and Customizable to Suit Your Needs
+      
+      . Simple Interface That's Very Easy to Use</pre>
+</div>
+
+<h2 align = "center" style="color: #fff;font-family:  Arial, Helvetica, sans-serif;margin-top: 100px;margin-bottom: 5px;">Investing Platforms </h2>
+<div style="display:flex;align-items: center;justify-content: center">
+  <div style="margin:10px">
+    <a href="https://groww.in/"><img src="https://www.couponzania.com/wp-content/uploads/2022/11/Groww-Logo.png" width="200" height="150"/></a>
+  </div>
+  <div  style="margin:10px">
+    <a href="https://zerodha.com/"><img src="https://www.marketinginasia.com/wp-content/uploads/2023/01/Zerodha-logo.png"width="200" height="150"/></a>
+  </div>
+  <div  style="margin:10px">
+    <a href="https://www.angelone.in/"><img src="https://s3images.zee5.com/wp-content/uploads/2021/08/cvbncbv-bv20210824111421.jpg" width="200" height="150"/></a>
+  </div>
+  <div  style="margin:10px">
+    <a href="https://upstox.com/"><img src="https://upstox.com/app/themes/upstox/dist/img/about/upstox_upgrades.png" width="200" height="150"/></a>
+  </div>
+
+</div>
+
+
+<footer style = "margin-top:100px;background: #2a3f70; padding:20px">
+        
+  <div class="content">
+    
+    <img class="ima" style="width: 150px;height: 120px;" src="{{url_for('static', filename='stock.png')}}">
+    
+    <h3 style="margin-right: 150px;">Stock-Ticker</h3>
+    <p>
+      The best stock screening, equity research and company analysis tool built
+      by a passionate team of investors at Stock_Ticker®. Intelligent Stock picking
+      Starts here.
+
+    </p>
+    
+    <p>Final Year Cs Project</p>
+    
+    <ul class="links">
+      <li>
+        <p>ALIM JAHAGIRDAR: S20-701</p>
+      </li>
+      <li>
+        <p>Harsh Yadav: S20-742</p>
+      </li>
+      <li>
+        <p>Vijay Oli: S20-730</p>
+      </li>
+    </ul>
+    <ul class="links">
+      <li>
+        <p>Leban Joy Cardozo: S20-724</p>
+      </li>
+      <li>
+        <p>Gautum Naik: S20-743</p>
+      </li>
+      <li>
+        <p>Anish : S20-701</p>
+      </li>
+    </ul>
+  
+  </div>
+  <div class="footer-bottom">
+    <p>copyright &copy;2023 designed by <span>Stock-Ticker</span> </p>
+  </div>
+</footer>
+
+</body>
+</html>
