@@ -21,14 +21,14 @@ path = "C:/Users/alimj/AppData/Local/Programs/Python/Python311/stocks.csv"
 df = pd.read_csv(path)
 
 firebaseConfig = {
-    "apiKey": "AIzaSyCAGKTcSpaTwa0aKh6lg-uBLp53QSNSrls",
-    "authDomain": "stock-7de83.firebaseapp.com",
-     "databaseURL": "https://stock-7de83-default-rtdb.firebaseio.com",
-    "projectId": "stock-7de83",
-    "storageBucket": "stock-7de83.appspot.com",
-    "messagingSenderId": "574586225113",
-    "appId": "1:574586225113:web:b1539b881d1bbae10a19c8",
-    "measurementId": "G-THSTVD3YE9"
+    "apiKey": "",
+    "authDomain": "",
+     "databaseURL": "",
+    "projectId": "",
+    "storageBucket": "",
+    "messagingSenderId": "",
+    "appId": "",
+    "measurementId": ""
   }
 firebase = pyrebase.initialize_app(firebaseConfig)
 auth = firebase.auth()
